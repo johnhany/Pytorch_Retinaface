@@ -88,6 +88,7 @@ def detect(imgs,
     # testing begin
     faces = []
     for img in imgs:
+        img = np.float32(img)
         im_height, im_width, _ = img.shape
         scale = torch.Tensor([img.shape[1], img.shape[0], img.shape[1], img.shape[0]])
         img -= (104, 117, 123)
@@ -146,6 +147,6 @@ def detect(imgs,
         for b in dets:
             if b[4] < vis_thres:
                 continue
-            face.append(b[:4], b[4], b[5:15])
+            face.append(b)
         faces.append(face)
     return faces
